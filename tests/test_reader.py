@@ -35,4 +35,4 @@ class TestReader(unittest.TestCase):
 
     def test_read_doc_error(self):
         path_to_doc = "tests/files/testDoc2.doc"
-        self.assertEqual((None, 0), self.reader.read_doc(path_to_doc))
+        self.assertEqual((None, 1), self.reader.read_doc(path_to_doc))
