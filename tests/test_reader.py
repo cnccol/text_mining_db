@@ -1,4 +1,5 @@
 import unittest
+from os import path
 from text_mining.reader import Reader
 
 class TestReader(unittest.TestCase):
@@ -13,3 +14,22 @@ class TestReader(unittest.TestCase):
 
     def test_read_docx_error(self):
         self.assertEqual((None, 0),self.reader.read_docx("tests/files/test_bad.docx"))
+
+    def test_doc2docx_and_remove(self):
+        path_to_docx = self.reader.doc2docx("tests/files/testDoc.doc")
+        self.assertTrue(path.exists(path_to_docx))
+        self.reader.delete_docx(path_to_docx)
+        self.assertFalse(path.exists(path_to_docx))
+
+    def test_doc2docx_and_remove_noexist(self):
+        path_to_docx = self.reader.doc2docx("tests/files/testDoc2.doc")
+        self.assertFalse(path.exists(path_to_docx))
+        self.reader.delete_docx(path_to_docx)
+        self.assertFalse(path.exists(path_to_docx))
+
+    def test_read_doc(self):
+        path_to_doc = "tests/files/testDoc.doc"
+        self.assertEqual(("Texto de prueba",1),self.reader.read_doc(path_to_doc))
+        
+        
+    
