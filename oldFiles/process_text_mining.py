@@ -26,15 +26,7 @@ import mysql.connector as connector
 UPDATE_SQL = "UPDATE docs_leidos SET leido = %s WHERE path_to_file = %s"
 SELECT_QUERY = "SELECT path_to_file FROM docs_leidos where leido = %s and grupo = %s"
 
-UNREAD_FILE = ['/run/user/1000/gvfs/smb-share:server=10.20.135.21,share=archivos/CNC_LICITACIONES/CNC_LICITACIONES/Licitaciones/2018/06 JUnio/BANCO DE LA REPÚBLICA ENCUESTA COMERCIANTES GANADA/Propuesta Centro Nacional de Consultoría S.A.pdf',
-               '/run/user/1000/gvfs/smb-share:server=10.20.135.21,share=archivos/CNC_LICITACIONES/CNC_LICITACIONES/Licitaciones/2019/07 JULIO 19/FINDETER/Sobre No. 1.pdf',
-               '/run/user/1000/gvfs/smb-share:server=10.20.135.21,share=archivos/CNC_LICITACIONES/CNC_LICITACIONES/Licitaciones/2019/07 JULIO 19/FINDETER/Sobre No. 2.pdf',
-               '/run/user/1000/gvfs/smb-share:server=10.20.135.21,share=archivos/CNC_LICITACIONES/CNC_LICITACIONES/Licitaciones/2019/07 JULIO 19/FINDETER/Documentos Entidad/Acta de Cierre (1).pdf']
 
-MANDATORY_READ_AS_IMAGE = ['/run/user/1000/gvfs/smb-share:server=10.20.135.21,share=archivos/CNC_LICITACIONES/CNC_LICITACIONES/Licitaciones/2018/11 Noviembre/DNP 40.000 EMPLEOS 008 - ECONOMETRIA SEI/PROPUESTAS OPONENTES/CM CONSULTORES/Experiencia Adicional c-1-100 Parte 1.pdf',
-                           '/run/user/1000/gvfs/smb-share:server=10.20.135.21,share=archivos/CNC_LICITACIONES/CNC_LICITACIONES/Licitaciones/2018/11 Noviembre/DNP 40.000 EMPLEOS 008 - ECONOMETRIA SEI/PROPUESTAS OPONENTES/CM CONSULTORES/Experiencia Adicional c-101-200 Parte 2.pdf',
-                           '/run/user/1000/gvfs/smb-share:server=10.20.135.21,share=archivos/CNC_LICITACIONES/CNC_LICITACIONES/Licitaciones/2018/11 Noviembre/DNP 40.000 EMPLEOS 008 - ECONOMETRIA SEI/PROPUESTAS OPONENTES/Experiencia Adicional c-201-300 Parte 3.pdf',
-                           '/run/user/1000/gvfs/smb-share:server=10.20.135.21,share=archivos/CNC_LICITACIONES/CNC_LICITACIONES/Licitaciones/2018/11 Noviembre/DNP 40.000 EMPLEOS 008 - ECONOMETRIA SEI/PROPUESTAS OPONENTES/Experiencia Adicional Directora- Anexo 6 y 7.pdf',]
 
 # Functions to check validity of a file
 
