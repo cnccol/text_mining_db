@@ -3,6 +3,7 @@ import os
 from zipfile import BadZipFile
 import subprocess
 
+
 class Reader:
     """Class that implements methods to read files in different formats"""
 
@@ -26,7 +27,7 @@ class Reader:
 
     def read_docx(self, path_to_docx):
         """Method to read .docx files returns text in the file and a flag to show completion
-        
+
         Args:
             path_to_docx (str): path to the docx file to read
 
@@ -38,12 +39,12 @@ class Reader:
         try:
             return self.clean_text(docx2txt.process(path_to_docx)), 1
         except BadZipFile:
-            return  None, 0
-            
+            return None, 0
+
     def doc2docx(self, path_to_doc):
-        
+
         """Method to convert .doc files into docx files
-        
+
         Args:
             path_to_doc (str): path to the doc file to read
 
@@ -51,13 +52,14 @@ class Reader:
             path_to_docx (str): path to the new docx file
         """
         if(os.path.exists(path_to_doc)):
-            subprocess.call(["soffice", "--headless", "--convert-to", "docx", path_to_doc], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            subprocess.call(["soffice", "--headless", "--convert-to", "docx", path_to_doc],
+                            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         return (path_to_doc+"x").split("/")[-1]
 
     def delete_docx(self, path_to_docx):
 
         """Method to delete extra .docx files
-        
+
         Args:
             path_to_docx (str): path to the docx file to delete
 
@@ -69,7 +71,7 @@ class Reader:
     def read_doc(self, path_to_doc):
 
         """Method to read .doc files returns text in the file and a flag to show completion
-        
+
         Args:
             path_to_doc (str): path to the doc file to read
 
