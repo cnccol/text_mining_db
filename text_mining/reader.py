@@ -2,6 +2,8 @@ import docx2txt
 import os
 from zipfile import BadZipFile
 import subprocess
+import textract
+import string
 
 
 class Reader:
@@ -9,7 +11,7 @@ class Reader:
 
     def clean_text(self, text):
 
-        """Helper method to clean text e.g. remove extra spaces, tabs and line changes
+        """Method to clean text e.g. remove extra spaces, tabs and line changes
 
         Args:
             text (str): The text to clean
@@ -17,10 +19,7 @@ class Reader:
         Returns:
             text: text without extra spaces, tabs and line changes
         """
-
-        text = text.replace("-\n", " ")
-        text = text.replace("\n", " ")
-        text = text.replace("\t", " ")
+        text = text.translate(str.maketrans(string.whitespace,  ' '*len(string.whitespace))).strip()
         while '  ' in text:
             text = text.replace('  ', ' ')
         return text
@@ -86,3 +85,17 @@ class Reader:
             return text, flag
         except FileNotFoundError:
             return None, 0
+
+    def read_pdf_txt(self, path_to_pdf):
+        """Method to read .pdf files as text files returns text in the file
+
+        Args:
+            path_to_pdf (str): path to the pdf file
+
+        Return:
+            text: text readed from the file.
+        """
+        try:
+            return self.clean_text(textract.process(path_to_pdf).decode('utf8'))
+        except textract.exceptions.MissingFileError:
+            return None
