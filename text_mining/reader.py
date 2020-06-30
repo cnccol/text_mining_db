@@ -6,7 +6,7 @@ import textract
 import string
 import pytesseract
 import pdf2image
-from pdf2image.pdf2image import _page_count
+from pdf2image.pdf2image import pdfinfo_from_path
 from PIL import Image
 
 
@@ -116,7 +116,7 @@ class Reader:
 
         text_list = []
         try:
-            n_pages = _page_count(path_to_pdf)
+            n_pages = pdfinfo_from_path(path_to_pdf)["Pages"]
 
             for i in range(1, n_pages+1):
                 try:
