@@ -1,2 +1,4 @@
 docx2txt
 textract
+pytesseract
+pdf2image

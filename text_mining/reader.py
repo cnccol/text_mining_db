@@ -4,6 +4,10 @@ from zipfile import BadZipFile
 import subprocess
 import textract
 import string
+import pytesseract
+import pdf2image
+from pdf2image.pdf2image import _page_count
+from PIL import Image
 
 
 class Reader:
@@ -98,4 +102,30 @@ class Reader:
         try:
             return self.clean_text(textract.process(path_to_pdf).decode('utf8'))
         except textract.exceptions.MissingFileError:
+            return None
+
+    def read_pdf_image(self, path_to_pdf, dpi=450):
+        """Method to read .pdf files as images files returns text in the file
+
+        Args:
+            path_to_pdf (str): path to the pdf file
+
+        Return:
+            text: text readed from the file.
+        """
+
+        text_list = []
+        try:
+            n_pages = _page_count(path_to_pdf)
+
+            for i in range(1, n_pages+1):
+                try:
+                    pages = pdf2image.convert_from_path(path_to_pdf, dpi, first_page=i, last_page=i)
+                    for page in pages:
+                        text = str(pytesseract.image_to_string(page, lang="spa"))
+                        text_list.append(text)
+                except Image.DecompressionBombError:
+                    text_list.append('')
+            return self.clean_text(' '.join(text_list))
+        except pdf2image.exceptions.PDFPageCountError:
             return None
