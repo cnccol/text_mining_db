@@ -14,7 +14,6 @@ class Reader:
     """Class that implements methods to read files in different formats"""
 
     def clean_text(self, text):
-
         """Method to clean text e.g. remove extra spaces, tabs and line changes
 
         Args:
@@ -38,14 +37,12 @@ class Reader:
             text: text readed from the file.
             flag: bool value that shows that the reading was succesful
         """
-
         try:
             return self.clean_text(docx2txt.process(path_to_docx)), 1
         except BadZipFile:
             return None, 0
 
     def doc2docx(self, path_to_doc):
-
         """Method to convert .doc files into docx files
 
         Args:
@@ -60,19 +57,16 @@ class Reader:
         return (path_to_doc+"x").split("/")[-1]
 
     def delete_docx(self, path_to_docx):
-
         """Method to delete extra .docx files
 
         Args:
             path_to_docx (str): path to the docx file to delete
 
         """
-
         if(os.path.exists(path_to_docx)):
             os.remove(path_to_docx)
 
     def read_doc(self, path_to_doc):
-
         """Method to read .doc files returns text in the file and a flag to show completion
 
         Args:
@@ -113,7 +107,6 @@ class Reader:
         Return:
             text: text readed from the file.
         """
-
         text_list = []
         try:
             n_pages = pdfinfo_from_path(path_to_pdf)["Pages"]
