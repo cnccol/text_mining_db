@@ -57,6 +57,6 @@ class TestReader(unittest.TestCase):
         path_pdf = "tests/files/test.pdf"
         self.assertEqual(("menos mal que no hay un bug grave",False), self.reader.read_pdf(path_pdf))
 
-    def test_read_pdf_as_txt_error(self):
+    def test_read_pdf_error(self):
         path_pdf = "tests/files/test2.pdf"
         self.assertEqual((None, False), self.reader.read_pdf(path_pdf))
