@@ -31,11 +31,11 @@ class TestReader(unittest.TestCase):
 
     def test_read_doc(self):
         path_to_doc = "tests/files/testDoc.doc"
-        self.assertEqual(("Texto de prueba", 1), self.reader.read_doc(path_to_doc))
+        self.assertEqual(("Texto de prueba", True), self.reader.read_doc(path_to_doc))
 
     def test_read_doc_error(self):
         path_to_doc = "tests/files/testDoc2.doc"
-        self.assertEqual((None, 0), self.reader.read_doc(path_to_doc))
+        self.assertEqual((None, False), self.reader.read_doc(path_to_doc))
 
     def test_read_pdf_as_txt(self):
         path_pdf = "tests/files/test.pdf"
@@ -52,3 +52,11 @@ class TestReader(unittest.TestCase):
     def test_read_pdf_as_image_error_no_file(self):
         path_pdf = "tests/files/test2.pdf"
         self.assertEqual(None, self.reader.read_pdf_image(path_pdf))
+
+    def test_read_pdf(self):
+        path_pdf = "tests/files/test.pdf"
+        self.assertEqual(("menos mal que no hay un bug grave",True), self.reader.read_pdf(path_pdf))
+
+    def test_read_pdf_as_txt_error(self):
+        path_pdf = "tests/files/test2.pdf"
+        self.assertEqual((None, False), self.reader.read_pdf(path_pdf))

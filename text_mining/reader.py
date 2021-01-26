@@ -38,9 +38,9 @@ class Reader:
             flag: bool value that shows that the reading was succesful
         """
         try:
-            return self.clean_text(docx2txt.process(path_to_docx)), 1
+            return self.clean_text(docx2txt.process(path_to_docx)), True
         except BadZipFile:
-            return None, 0
+            return None, False
 
     def doc2docx(self, path_to_doc):
         """Method to convert .doc files into docx files
@@ -57,7 +57,7 @@ class Reader:
         return (path_to_doc+"x").split("/")[-1]
 
     def delete_docx(self, path_to_docx):
-        """Method to delete extra .docx files
+        """Method to delete extra .docx filesflag: bool value that shows that the reading was succesful
 
         Args:
             path_to_docx (str): path to the docx file to delete
@@ -82,7 +82,7 @@ class Reader:
             self.delete_docx(path_to_docx)
             return text, flag
         except FileNotFoundError:
-            return None, 0
+            return None, False
 
     def read_pdf_txt(self, path_to_pdf):
         """Method to read .pdf files as text files returns text in the file
@@ -104,7 +104,7 @@ class Reader:
         Args:
             path_to_pdf (str): path to the pdf file
 
-        Return:
+        Return:flag: bool value that shows that the reading was succesful
             text: text readed from the file.
         """
         text_list = []
@@ -122,3 +122,35 @@ class Reader:
             return self.clean_text(' '.join(text_list))
         except pdf2image.exceptions.PDFPageCountError:
             return None
+
+    def valid_text(text):
+        """Method to verify the validity of a text.
+
+        Args:
+            text (str): text to check
+
+        Return:
+            valid: flag that shows if the text is vaild.
+        """
+        if text is None:
+            return False
+        if len(text) < 100:
+            return False
+        if text.lower().find(' de ')==0 or text.lower().find(' con '):
+            return False
+        return True
+
+    def read_pdf(self, path_to_pdf):
+        """Method to read .pdf files
+
+        Args:
+            path_to_pdf (str): path to the pdf file
+
+        Return:
+            text: text readed from the file.
+            flag: bool value that shows that the reading was succesful
+        """
+        text = self.read_pdf_txt(path_to_pdf)
+        if not valid_text(text):
+            text = self.read_pdf_image(path_to_pdf)
+        return text, valid_text(text)
