@@ -123,7 +123,7 @@ class Reader:
         except pdf2image.exceptions.PDFPageCountError:
             return None
 
-    def valid_text(text):
+    def valid_text(self, text):
         """Method to verify the validity of a text.
 
         Args:
@@ -151,6 +151,6 @@ class Reader:
             flag: bool value that shows that the reading was succesful
         """
         text = self.read_pdf_txt(path_to_pdf)
-        if not valid_text(text):
+        if not self.valid_text(text):
             text = self.read_pdf_image(path_to_pdf)
-        return text, valid_text(text)
+        return text, self.valid_text(text)
