@@ -3,3 +3,7 @@ textract
 pytesseract
 pdf2image
 pillow
+google-cloud-firestore
+mock-firestore
+pytest
+pydantic
