@@ -136,7 +136,7 @@ class Reader:
             return False
         if len(text) < 100:
             return False
-        if text.lower().find(' de ')==0 or text.lower().find(' con '):
+        if text.lower().find(' de ')==0 or text.lower().find(' con ')==0:
             return False
         return True
 
